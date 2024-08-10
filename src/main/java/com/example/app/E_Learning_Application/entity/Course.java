@@ -21,7 +21,7 @@ public class Course {
 
     private String longDescription;
 
-    private Double price;
+    private double price;
 
     private boolean live=false;
 
