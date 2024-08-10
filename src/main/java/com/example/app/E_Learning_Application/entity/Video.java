@@ -12,7 +12,6 @@ import lombok.Data;
 public class Video {
 
     @Id
-
     private String id;
 
     private String title;
