@@ -1,9 +1,12 @@
+E:\springboot\E-Learning-Application\src\main\java\com\example\app\E_Learning_Application\config\AppConstants.java
 E:\springboot\E-Learning-Application\src\main\java\com\example\app\E_Learning_Application\config\ProjectConfig.java
+E:\springboot\E-Learning-Application\src\main\java\com\example\app\E_Learning_Application\config\SwaggerConfig.java
 E:\springboot\E-Learning-Application\src\main\java\com\example\app\E_Learning_Application\controllers\CategoryController.java
 E:\springboot\E-Learning-Application\src\main\java\com\example\app\E_Learning_Application\controllers\CourseController.java
 E:\springboot\E-Learning-Application\src\main\java\com\example\app\E_Learning_Application\dtos\CategoryDto.java
 E:\springboot\E-Learning-Application\src\main\java\com\example\app\E_Learning_Application\dtos\CourseDto.java
 E:\springboot\E-Learning-Application\src\main\java\com\example\app\E_Learning_Application\dtos\CustomMessage.java
+E:\springboot\E-Learning-Application\src\main\java\com\example\app\E_Learning_Application\dtos\CustomPageResponse.java
 E:\springboot\E-Learning-Application\src\main\java\com\example\app\E_Learning_Application\dtos\VideoDto.java
 E:\springboot\E-Learning-Application\src\main\java\com\example\app\E_Learning_Application\ELearningApplication.java
 E:\springboot\E-Learning-Application\src\main\java\com\example\app\E_Learning_Application\entities\Category.java

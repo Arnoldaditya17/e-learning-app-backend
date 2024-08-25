@@ -31,10 +31,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<CourseDto> getAllCourses() {
         List<Course> courses = courseRepository.findAll();
-        List<CourseDto> courseDtoList = courses.stream().map(course -> entityDtoMapper
-                        .toDto(course, CourseDto.class))
-                .collect(Collectors.toList());
-        return courseDtoList;
+        return courses.stream().map(course -> entityDtoMapper.toDto(course, CourseDto.class)).collect(Collectors.toList());
     }
 
     @Override
@@ -50,12 +47,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void deleteCourseById(String id) {
-        Course course = courseRepository
-                .findById(id)
-                .orElseThrow(
+        Course course = courseRepository.findById(id).orElseThrow(
 
-                        () -> new ResourceNotFoundException("course not found !")
-                );
+                () -> new ResourceNotFoundException("course not found !"));
         courseRepository.delete(course);
 
     }

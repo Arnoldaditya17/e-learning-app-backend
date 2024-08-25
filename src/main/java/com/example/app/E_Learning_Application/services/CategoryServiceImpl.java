@@ -8,9 +8,9 @@ import com.example.app.E_Learning_Application.repositories.CategoryRepository;
 import com.example.app.E_Learning_Application.utils.EntityDtoMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -45,8 +45,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CustomPageResponse<CategoryDto> getAllCategories(int pageNumber, int pageSize) {
-        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+    public CustomPageResponse<CategoryDto> getAllCategories(int pageNumber, int pageSize, String sortBy, String sortOrder) {
+        Sort.Direction direction = Sort.Direction.fromString(sortOrder);
+        Sort sort = Sort.by(direction, sortBy);
+        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize, sort);
         Page<Category> categoryPage = categoryRepository.findAll(pageRequest);
         List<Category> categoryList = categoryPage.getContent();
 
@@ -58,7 +60,6 @@ public class CategoryServiceImpl implements CategoryService {
         customPageResponse.setTotalElements(categoryPage.getTotalElements());
         customPageResponse.setTotalPages(categoryPage.getTotalPages());
         customPageResponse.setContent(categoryDtoList);
-
 
 
         return customPageResponse;
