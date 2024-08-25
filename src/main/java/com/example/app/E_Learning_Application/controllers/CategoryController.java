@@ -1,31 +1,73 @@
 package com.example.app.E_Learning_Application.controllers;
 
+import com.example.app.E_Learning_Application.config.AppConstants;
 import com.example.app.E_Learning_Application.dtos.CategoryDto;
-import com.example.app.E_Learning_Application.dtos.CourseDto;
-import com.example.app.E_Learning_Application.repositories.CategoryRepository;
+import com.example.app.E_Learning_Application.dtos.CustomMessage;
+import com.example.app.E_Learning_Application.dtos.CustomPageResponse;
 import com.example.app.E_Learning_Application.services.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/api/v1/categories")
+@Tag(name = "Category")
 public class CategoryController {
+
+    private final CategoryService categoryService;
 
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
-    CategoryService categoryService;
 
-@PostMapping
-    public CategoryDto addCategory(@RequestBody CategoryDto categoryDto) {
+    @PostMapping
+    public ResponseEntity<CategoryDto> addCategory(@RequestBody CategoryDto categoryDto) {
+        CategoryDto createdDto = categoryService.createCategory(categoryDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdDto);
+
+    }
 
 
 
+    @GetMapping
+    public CustomPageResponse<CategoryDto> getAllCategories(
+            @RequestParam(value = "pageNumber", required = false, defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int pageNumber,
+            @RequestParam(value = "pageSize", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int pageSize) {
+        return categoryService.getAllCategories(pageNumber,pageSize);
+    }
 
-}
+
+
+    @GetMapping("/{categoryId}")
+    public CategoryDto getCategoryById(@PathVariable String categoryId) {
+        return categoryService.getCategoryById(categoryId);
+    }
+
+
+
+    @DeleteMapping("/{categoryId}")
+    public ResponseEntity<CustomMessage> deleteCategoryById(@PathVariable String categoryId) {
+        categoryService.deleteCategoryById(categoryId);
+        CustomMessage customMessage = new CustomMessage();
+        customMessage.setMessage("Category deleted successfully");
+        customMessage.setSuccess(true);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(customMessage);
+
+    }
+
+
+
+    @PutMapping("/{categoryId}")
+    public ResponseEntity<CategoryDto> updateCategory(@RequestBody CategoryDto categoryDto, @PathVariable String categoryId) {
+        CategoryDto createdDto = categoryService.updateCategory(categoryDto, categoryId);
+        return ResponseEntity.status(HttpStatus.OK
+        ).body(createdDto);
+    }
+
 
 }
