@@ -1,6 +1,7 @@
 package com.example.app.E_Learning_Application.services;
 
 import com.example.app.E_Learning_Application.dtos.CategoryDto;
+import com.example.app.E_Learning_Application.dtos.CustomPageResponse;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ public interface CategoryService {
 
     CategoryDto createCategory(CategoryDto categoryDto);
 
-    List<CategoryDto> getAllCategories();
+    CustomPageResponse<CategoryDto> getAllCategories(int pageNumber, int pageSize);
 
     CategoryDto getCategoryById(String id);
 

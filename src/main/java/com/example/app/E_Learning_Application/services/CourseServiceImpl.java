@@ -6,7 +6,6 @@ import com.example.app.E_Learning_Application.exceptions.ResourceNotFoundExcepti
 import com.example.app.E_Learning_Application.repositories.CourseRepository;
 import com.example.app.E_Learning_Application.utils.EntityDtoMapper;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.stream.Collectors;
 public class CourseServiceImpl implements CourseService {
 
     private final EntityDtoMapper entityDtoMapper;
-    private ModelMapper modelMapper;
     private CourseRepository courseRepository;
 
     public CourseServiceImpl(EntityDtoMapper entityDtoMapper) {
