@@ -1,6 +1,8 @@
+com\example\app\E_Learning_Application\config\AppConstants.class
 com\example\app\E_Learning_Application\repositories\VideoRepository.class
 com\example\app\E_Learning_Application\controllers\CourseController.class
 com\example\app\E_Learning_Application\controllers\CategoryController.class
+com\example\app\E_Learning_Application\config\SwaggerConfig.class
 com\example\app\E_Learning_Application\services\VideoService.class
 com\example\app\E_Learning_Application\services\CategoryServiceImpl.class
 com\example\app\E_Learning_Application\config\ProjectConfig.class
@@ -14,6 +16,7 @@ com\example\app\E_Learning_Application\dtos\CustomMessage.class
 com\example\app\E_Learning_Application\services\CourseServiceImpl.class
 com\example\app\E_Learning_Application\exceptions\ResourceNotFoundException.class
 com\example\app\E_Learning_Application\repositories\UserRepository.class
+com\example\app\E_Learning_Application\dtos\CustomPageResponse.class
 com\example\app\E_Learning_Application\repositories\CategoryRepository.class
 com\example\app\E_Learning_Application\ELearningApplication.class
 com\example\app\E_Learning_Application\exceptions\GlobalExceptionHandler.class

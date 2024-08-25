@@ -6,8 +6,10 @@ import com.example.app.E_Learning_Application.dtos.CustomMessage;
 import com.example.app.E_Learning_Application.dtos.CustomPageResponse;
 import com.example.app.E_Learning_Application.services.CategoryService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -24,7 +26,7 @@ public class CategoryController {
 
 
     @PostMapping
-    public ResponseEntity<CategoryDto> addCategory(@RequestBody CategoryDto categoryDto) {
+    public ResponseEntity<CategoryDto> addCategory(@Valid @RequestBody CategoryDto categoryDto, BindingResult bindingResult) {
         CategoryDto createdDto = categoryService.createCategory(categoryDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createdDto);
@@ -32,21 +34,20 @@ public class CategoryController {
     }
 
 
-
     @GetMapping
     public CustomPageResponse<CategoryDto> getAllCategories(
             @RequestParam(value = "pageNumber", required = false, defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int pageNumber,
-            @RequestParam(value = "pageSize", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int pageSize) {
-        return categoryService.getAllCategories(pageNumber,pageSize);
+            @RequestParam(value = "pageSize", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int pageSize,
+            @RequestParam(value = "sortBy", required = false, defaultValue = AppConstants.DEFAULT_SORT_BY) String sortBy,
+            @RequestParam(value = "sortOrder", required = false, defaultValue = AppConstants.DEFAULT_SORT_ORDER) String sortOrder) {
+        return categoryService.getAllCategories(pageNumber, pageSize, sortBy, sortOrder);
     }
-
 
 
     @GetMapping("/{categoryId}")
     public CategoryDto getCategoryById(@PathVariable String categoryId) {
         return categoryService.getCategoryById(categoryId);
     }
-
 
 
     @DeleteMapping("/{categoryId}")
@@ -59,7 +60,6 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(customMessage);
 
     }
-
 
 
     @PutMapping("/{categoryId}")

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.app.E_Learning_Application.ELearningApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.709 s -- in com.example.app.E_Learning_Application.ELearningApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.008 s -- in com.example.app.E_Learning_Application.ELearningApplicationTests
