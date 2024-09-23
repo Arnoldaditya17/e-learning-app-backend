@@ -5,32 +5,36 @@ import com.example.app.E_Learning_Application.dtos.CategoryDto;
 import com.example.app.E_Learning_Application.dtos.CustomMessage;
 import com.example.app.E_Learning_Application.dtos.CustomPageResponse;
 import com.example.app.E_Learning_Application.services.CategoryService;
+import com.example.app.E_Learning_Application.services.FileService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.UUID;
 
 
 @RestController
 @RequestMapping("/api/v1/categories")
-@Tag(name = "Category")
+@Tag(name = "Categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
+    private final FileService fileService;
 
-    public CategoryController(CategoryService categoryService) {
+    public CategoryController(CategoryService categoryService, FileService fileService) {
         this.categoryService = categoryService;
+        this.fileService = fileService;
     }
 
 
-    @PostMapping
-    public ResponseEntity<CategoryDto> addCategory(@Valid @RequestBody CategoryDto categoryDto, BindingResult bindingResult) {
-        CategoryDto createdDto = categoryService.createCategory(categoryDto);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdDto);
-
+    @PostMapping(consumes = {"multipart/form-data"})
+    public ResponseEntity<CategoryDto> addCategory(@Valid @RequestPart CategoryDto categoryDto, @RequestParam("file") MultipartFile file) {
+        String folder=AppConstants.CATEGORIES_FOLDER_PATH;
+        categoryDto.setBanner(fileService.uploadImage(file,folder));
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.createCategory(categoryDto));
     }
 
 
@@ -44,15 +48,15 @@ public class CategoryController {
     }
 
 
-    @GetMapping("/{categoryId}")
-    public CategoryDto getCategoryById(@PathVariable String categoryId) {
-        return categoryService.getCategoryById(categoryId);
+    @GetMapping("/{id}")
+    public CategoryDto getCategoryById(@PathVariable UUID id) {
+        return categoryService.getCategoryById(id);
     }
 
 
-    @DeleteMapping("/{categoryId}")
-    public ResponseEntity<CustomMessage> deleteCategoryById(@PathVariable String categoryId) {
-        categoryService.deleteCategoryById(categoryId);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CustomMessage> deleteCategoryById(@PathVariable UUID id) {
+        categoryService.deleteCategoryById(id);
         CustomMessage customMessage = new CustomMessage();
         customMessage.setMessage("Category deleted successfully");
         customMessage.setSuccess(true);
@@ -62,9 +66,9 @@ public class CategoryController {
     }
 
 
-    @PutMapping("/{categoryId}")
-    public ResponseEntity<CategoryDto> updateCategory(@RequestBody CategoryDto categoryDto, @PathVariable String categoryId) {
-        CategoryDto createdDto = categoryService.updateCategory(categoryDto, categoryId);
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryDto> updateCategory(@RequestBody CategoryDto categoryDto, @PathVariable UUID id) {
+        CategoryDto createdDto = categoryService.updateCategory(categoryDto, id);
         return ResponseEntity.status(HttpStatus.OK
         ).body(createdDto);
     }

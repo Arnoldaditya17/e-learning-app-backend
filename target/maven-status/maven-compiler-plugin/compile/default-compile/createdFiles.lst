@@ -27,3 +27,4 @@ com\example\app\E_Learning_Application\repositories\CourseRepository.class
 com\example\app\E_Learning_Application\services\CategoryService.class
 com\example\app\E_Learning_Application\dtos\VideoDto.class
 com\example\app\E_Learning_Application\utils\EntityDtoMapper.class
+com\example\app\E_Learning_Application\services\VideoServiceImpl.class

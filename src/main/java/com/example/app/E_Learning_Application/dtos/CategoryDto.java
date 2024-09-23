@@ -4,13 +4,15 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 @Data
-public class CategoryDto {
+public class CategoryDto implements Serializable {
 
 
-    private String id;
+    private UUID id;
 
     @NotNull(message = "title is required !!")
     @Size(min = 3,max = 50,message = "title length should be between 3 to 50 characters !!")
@@ -20,5 +22,7 @@ public class CategoryDto {
     private String description;
 
     private Date created_at;
+
+    private String banner;
 
 }

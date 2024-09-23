@@ -1,18 +1,19 @@
 package com.example.app.E_Learning_Application.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
 @Data
 @Table(name = "videos")
-public class Video {
+public class Video implements Serializable {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String title;
 
