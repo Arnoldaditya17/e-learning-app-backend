@@ -2,13 +2,17 @@ package com.example.app.E_Learning_Application.dtos;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Data
-public class CourseDto {
+public class CourseDto implements Serializable {
 
+
+    private UUID id;
 
     private String title;
 
@@ -29,7 +33,7 @@ public class CourseDto {
     private Date updated_at;
 
 
-    private List<VideoDto> videoList = new ArrayList<>();
+//    private List<VideoDto> videoList = new ArrayList<>();
 
     private List<CategoryDto> categoryList = new ArrayList<>();
 }
